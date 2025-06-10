@@ -7,34 +7,19 @@ const Experience = () => {
       title: "IT Strategist",
       company: "Riflessi | Luxury Italian Menswear",
       period: "Oct. 2024 - May 2025",
-      location: "Remote",
+      location: "New York, NY",
       achievements: [
         "Automated product entry in Shopify, cutting processing time by 47% through scripting",
         "Provided technical support and troubleshooting, ensuring seamless in-store operations",
         "Customized Shopify store using Liquid, JavaScript, and CSS, aligning with managerial needs",
         "Strengthened website security by implementing input validation against XSS vulnerabilities"
       ],
-      type: "current",
-      color: "primary"
-    },
-    {
-      title: "Program Development",
-      company: "Personal Projects",
-      period: "June 2024 - Current",
-      location: "Remote",
-      achievements: [
-        "Automated AI bot access and reservation booking systems",
-        "Developed secure authentication mechanisms",
-        "Implemented robust error handling and logging"
-      ],
-      type: "current",
-      color: "primary"
     },
     {
       title: "Cyberstart America Member",
       company: "National Cyber Scholarship Foundation",
       period: "Oct. 2022 - May 2023",
-      location: "National Program",
+      location: "Remote",
       achievements: [
         "Achieved Top 2% ranking nationally in cybersecurity competitions",
         "Completed advanced cybersecurity challenges and assessments",

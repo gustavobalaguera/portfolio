@@ -20,7 +20,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 gap-16 items-center">
           {/* Profile Image and Text */}
           <div className="space-y-8 animate-slide-left">
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">

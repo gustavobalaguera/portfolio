@@ -117,7 +117,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-6 mt-4 sm:mt-0">
               <p className="text-secondary-400 text-sm flex items-center">
-                Built with <Heart className="h-4 w-4 text-red-500 mx-1" /> and React
+                Back to top of page
               </p>
               <button
                 onClick={scrollToTop}
