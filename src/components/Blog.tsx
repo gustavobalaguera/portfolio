@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, ArrowRight, FileText, Search, Tag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
 
 interface BlogPost {
   id: string;
@@ -89,7 +88,7 @@ const Blog = () => {
   ];
 
   useEffect(() => {
-    // For now, use sample data. In production, this would fetch from Supabase
+    // Use sample data for static site
     setPosts(samplePosts);
     setLoading(false);
   }, []);

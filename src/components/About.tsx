@@ -27,7 +27,7 @@ const About = () => {
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                 <img 
-                  src="/src/assets/Me_Background.png" 
+                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                   alt="Gustavo Balaguera - Professional Photo"
                   className="relative w-48 h-48 lg:w-56 lg:h-56 object-cover rounded-2xl border-2 border-primary-500/20 shadow-2xl group-hover:scale-105 transition-transform duration-300"
                 />
