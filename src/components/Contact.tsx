@@ -25,21 +25,17 @@ const Contact = () => {
             name: formData.name,
             email: formData.email,
             subject: formData.subject,
-            message: formData.message,
-            created_at: new Date().toISOString()
+            message: formData.message
           }
         ]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Also create mailto link as backup
-      const mailtoLink = `mailto:gustavobalaguera214@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )}`;
-      window.open(mailtoLink, '_blank');
       
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -68,13 +64,13 @@ const Contact = () => {
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 animate-slide-top">
             <span className="bg-gradient-to-r from-white to-primary-300 bg-clip-text text-transparent">
               Get In Touch
             </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mb-8"></div>
-          <p className="text-xl text-secondary-300 max-w-3xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mb-8 animate-scale-in animate-delay-200"></div>
+          <p className="text-xl text-secondary-300 max-w-3xl mx-auto animate-fade-in-up animate-delay-300">
             I'm actively seeking internships and opportunities in cybersecurity. 
             Let's connect to discuss how I can contribute to your organization's security goals.
           </p>
@@ -82,7 +78,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div className="space-y-8 animate-slide-in-left">
+          <div className="space-y-8 animate-slide-left">
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">
                 Let's Start a Conversation
@@ -162,7 +158,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="animate-slide-in-right">
+          <div className="animate-slide-right">
             <div className="bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-white mb-8">Send a Message</h3>
               

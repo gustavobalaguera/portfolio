@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Shield } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,21 +17,37 @@ const Header = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setIsMenuOpen(false);
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsMenuOpen(false);
   };
 
   const navItems = [
-    { label: 'Home', id: 'hero' },
-    { label: 'About', id: 'about' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Awards', id: 'awards' },
-    { label: 'Contact', id: 'contact' },
+    { label: 'Home', id: 'hero', type: 'section' },
+    { label: 'About', id: 'about', type: 'section' },
+    { label: 'Experience', id: 'experience', type: 'section' },
+    { label: 'Projects', id: 'projects', type: 'section' },
+    { label: 'Skills', id: 'skills', type: 'section' },
+    { label: 'Awards', id: 'awards', type: 'section' },
+    { label: 'Blog', id: '/blog', type: 'route' },
+    { label: 'Contact', id: 'contact', type: 'section' },
   ];
 
   return (
@@ -39,7 +58,10 @@ const Header = () => {
     }`}>
       <nav className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex items-center space-x-3">
+          <button 
+            onClick={() => handleNavigation('/')}
+            className="flex items-center space-x-3"
+          >
             <div className="relative">
               <Shield className="h-8 w-8 text-primary-400 animate-glow" />
               <div className="absolute inset-0 h-8 w-8 bg-primary-400/20 rounded-full blur-md"></div>
@@ -47,14 +69,14 @@ const Header = () => {
             <span className="text-xl font-bold bg-gradient-to-r from-white to-primary-200 bg-clip-text text-transparent">
               Gustavo Balaguera
             </span>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => item.type === 'section' ? scrollToSection(item.id) : handleNavigation(item.id)}
                 className="relative text-sm font-medium text-secondary-300 hover:text-white transition-all duration-300 group"
               >
                 {item.label}
@@ -81,7 +103,7 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => item.type === 'section' ? scrollToSection(item.id) : handleNavigation(item.id)}
                   className="block w-full text-left text-secondary-300 hover:text-white transition-colors duration-300 py-2"
                 >
                   {item.label}

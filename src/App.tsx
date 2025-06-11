@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,21 +9,29 @@ import Skills from './components/Skills';
 import Awards from './components/Awards';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-secondary-950 text-white overflow-x-hidden">
         <Header />
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Awards />
-          <Contact />
-        </main>
+        <Routes>
+          <Route path="/" element={
+            <main>
+              <Hero />
+              <About />
+              <Experience />
+              <Projects />
+              <Skills />
+              <Awards />
+              <Contact />
+            </main>
+          } />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+        </Routes>
         <Footer />
       </div>
     </Router>

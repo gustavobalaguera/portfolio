@@ -1,7 +1,10 @@
 import React from 'react';
 import { ExternalLink, Github, Cloud, Shield, TrendingUp, Lock, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Projects = () => {
+  const navigate = useNavigate();
+
   const projects = [
     {
       title: "Security Monitoring System",
@@ -15,7 +18,8 @@ const Projects = () => {
       ],
       technologies: ["AWS CloudWatch", "AWS Secrets Manager", "SNS", "Lambda", "Python"],
       icon: Shield,
-      gradient: "from-primary-500 to-primary-600"
+      gradient: "from-primary-500 to-primary-600",
+      slug: "security-monitoring-system"
     },
     {
       title: "Cloud Security Framework with AWS IAM",
@@ -29,7 +33,8 @@ const Projects = () => {
       ],
       technologies: ["AWS IAM", "EC2", "CloudTrail", "Python", "Terraform"],
       icon: Cloud,
-      gradient: "from-primary-600 to-secondary-600"
+      gradient: "from-primary-600 to-secondary-600",
+      slug: "cloud-security-framework-aws-iam"
     },
     {
       title: "Optimized Shopify Website",
@@ -43,9 +48,14 @@ const Projects = () => {
       ],
       technologies: ["Shopify", "Liquid", "JavaScript", "CSS", "Klaviyo", "SEO"],
       icon: TrendingUp,
-      gradient: "from-secondary-500 to-primary-500"
+      gradient: "from-secondary-500 to-primary-500",
+      slug: "optimized-shopify-website"
     }
   ];
+
+  const handleViewDetails = (slug: string) => {
+    navigate(`/blog/${slug}`);
+  };
 
   return (
     <section id="projects" className="py-24 relative">
@@ -126,7 +136,10 @@ const Projects = () => {
 
                   {/* Project Actions */}
                   <div className="mt-auto">
-                    <button className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white py-3 px-4 rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium group/btn">
+                    <button 
+                      onClick={() => handleViewDetails(project.slug)}
+                      className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white py-3 px-4 rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium group/btn"
+                    >
                       <ExternalLink className="h-4 w-4" />
                       View Details
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
@@ -163,13 +176,10 @@ const Projects = () => {
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
               <button
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={() => navigate('/blog')}
                 className="group border-2 border-primary-500 text-primary-400 py-4 px-8 rounded-xl hover:bg-primary-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-3"
               >
-                Get In Touch
+                View Blog
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
