@@ -1,15 +1,17 @@
 {
+  "homepage": "https://gustavobalaguera.github.io/portfolio",
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
+    
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
@@ -37,5 +39,5 @@
     "typescript-eslint": "^8.8.1",
     "vite": "^5.4.10"
   },
-  "homepage": "https://gustavobalaguera.github.io/me"
+  
 }
