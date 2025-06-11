@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink, Github, Cloud, Shield, TrendingUp, Lock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

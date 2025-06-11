@@ -1,5 +1,4 @@
-import React from 'react';
-import { GraduationCap, Award, Code, Shield, Target, Users, Store } from 'lucide-react';
+import { GraduationCap, Award, Code, Store } from 'lucide-react';
 
 const About = () => {
   return (

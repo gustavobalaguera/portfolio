@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, ArrowRight, FileText, Search, Tag } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Calendar, Clock, ArrowRight, FileText, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface BlogPost {

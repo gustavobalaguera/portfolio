@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft, Tag, ExternalLink, Github } from 'lucide-react';
 import { marked } from 'marked';
@@ -609,7 +609,7 @@ This project was possible thanks to the amazing people at Nextwork. For more det
         </footer>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .markdown-content h1 {
           @apply text-3xl font-bold text-white mb-6 mt-8;
         }

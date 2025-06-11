@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChevronDown, Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 
 const Hero = () => {

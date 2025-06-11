@@ -1,5 +1,4 @@
-import React from 'react';
-import { Code, Cloud, Shield, Wrench } from 'lucide-react';
+import { Code, Shield, Wrench } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
