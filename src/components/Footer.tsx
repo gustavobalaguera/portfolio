@@ -8,6 +8,9 @@ const Footer = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If not found, navigate to homepage with hash
+      window.location.href = `/`;
     }
   };
 
@@ -66,12 +69,14 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {[
-                { label: 'About', id: 'about' },
-                { label: 'Experience', id: 'experience' },
-                { label: 'Projects', id: 'projects' },
-                { label: 'Skills', id: 'skills' },
-                { label: 'Awards', id: 'awards' },
-                { label: 'Contact', id: 'contact' },
+                { label: 'Home', id: 'hero', type: 'section' },
+    { label: 'About', id: 'about', type: 'section' },
+    { label: 'Experience', id: 'experience', type: 'section' },
+    { label: 'Projects', id: 'projects', type: 'section' },
+    { label: 'Skills', id: 'skills', type: 'section' },
+    { label: 'Awards', id: 'awards', type: 'section' },
+    { label: 'Blog', id: '/blog', type: 'route' },
+    { label: 'Contact', id: 'contact', type: 'section' },
               ].map((link) => (
                 <li key={link.id}>
                   <button
@@ -113,7 +118,7 @@ const Footer = () => {
         <div className="border-t border-secondary-800/50 mt-12 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-secondary-400 text-sm">
-              © {currentYear} Gustavo Balaguera. All rights reserved.
+              © {currentYear} Site Smith. All rights reserved.
             </p>
             <div className="flex items-center gap-6 mt-4 sm:mt-0">
               <p className="text-secondary-400 text-sm flex items-center">

@@ -25,13 +25,13 @@ const Projects = () => {
       title: "Cloud Security Framework with AWS IAM",
       company: "Nextwork",
       date: "June 2025",
-      description: "Robust cloud security framework implementing zero-trust principles with AWS Identity and Access Management.",
+      description: "Robust cloud security framework implementing role-based access with AWS Identity and Access Management.",
       achievements: [
         "Hardened EC2 instances with IAM policies, reducing unauthorized access risks by 30%",
         "Implemented role-based access control, increasing security compliance by 20%",
         "Developed automated compliance monitoring and reporting system"
       ],
-      technologies: ["AWS IAM", "EC2", "CloudTrail", "Python", "Terraform"],
+      technologies: ["AWS IAM", "EC2", "CloudTrail", "JSON"],
       icon: Cloud,
       gradient: "from-primary-600 to-secondary-600",
       slug: "cloud-security-framework-aws-iam"
@@ -166,7 +166,7 @@ const Projects = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://github.com/gustavobalaguera"
+                href="https://github.com/gustavobalaguera?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group bg-secondary-700 text-white py-4 px-8 rounded-xl hover:bg-secondary-600 transition-all duration-300 flex items-center justify-center gap-3"

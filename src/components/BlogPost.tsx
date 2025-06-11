@@ -29,7 +29,6 @@ const BlogPost = () => {
     gfm: true,
   });
 
-  // Sample blog post content
   const samplePosts: { [key: string]: BlogPost } = {
     'security-monitoring-system': {
       id: '1',
@@ -37,704 +36,417 @@ const BlogPost = () => {
       slug: 'security-monitoring-system',
       excerpt: 'Deep dive into building a comprehensive security monitoring solution using AWS CloudWatch, Secrets Manager, and SNS for real-time threat detection and incident response.',
       content: `
-# Security Monitoring System: Building Real-Time Threat Detection with AWS
+# Build a Security Monitoring System
 
-## Project Overview
-
-In today's rapidly evolving threat landscape, organizations need robust security monitoring systems that can detect and respond to threats in real-time. This project demonstrates the implementation of a comprehensive security monitoring solution using AWS cloud services.
-
-## Architecture Overview
-
-The security monitoring system leverages several AWS services to create a multi-layered defense strategy:
-
-### Core Components
-
-1. **AWS CloudWatch** - Central monitoring and logging
-2. **AWS Secrets Manager** - Secure credential management
-3. **Amazon SNS** - Real-time notifications
-4. **AWS Lambda** - Automated response functions
-5. **Amazon EC2** - Monitored infrastructure
-
-## Implementation Details
-
-### 1. Credential Security with AWS Secrets Manager
-
-One of the first priorities was securing all system credentials. AWS Secrets Manager provides:
-
-- Automatic credential rotation
-- Encrypted storage
-- Fine-grained access control
-- Integration with other AWS services
-
-\`\`\`python
-import boto3
-from botocore.exceptions import ClientError
-
-def get_secret(secret_name, region_name):
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
-    
-    try:
-        get_secret_value_response = client.get_secret_value(
-            SecretId=secret_name
-        )
-    except ClientError as e:
-        raise e
-    
-    return get_secret_value_response['SecretString']
-\`\`\`
-
-### 2. Real-Time Monitoring with CloudWatch
-
-CloudWatch Metric Filters were implemented to detect anomalous patterns:
-
-- Failed login attempts
-- Unusual network traffic
-- Resource utilization spikes
-- Application errors
-
-**Key Achievement**: Reduced response time by 20% through automated anomaly detection.
-
-### 3. Automated Alerting System
-
-The SNS notification system provides immediate alerts for:
-
-- Security incidents
-- System failures
-- Performance degradation
-- Compliance violations
-
-**Impact**: Improved threat detection efficiency by 45% with automated CloudWatch Alarms.
-
-## Security Benefits
-
-### Defense in Depth
-
-The system implements multiple security layers:
-
-1. **Preventive Controls**: IAM policies, security groups
-2. **Detective Controls**: CloudWatch monitoring, log analysis
-3. **Responsive Controls**: Automated incident response
-4. **Recovery Controls**: Backup and disaster recovery
-
-### Compliance and Auditing
-
-- Comprehensive logging of all security events
-- Automated compliance reporting
-- Audit trail maintenance
-- Regular security assessments
-
-## Lessons Learned
-
-### Technical Insights
-
-1. **Automation is Key**: Manual monitoring doesn't scale
-2. **Context Matters**: Alerts need sufficient context for effective response
-3. **Integration**: Seamless integration between services reduces complexity
-
-### Best Practices
-
-- Implement least privilege access
-- Regular security reviews and updates
-- Continuous monitoring and improvement
-- Documentation and knowledge sharing
-
-## Future Enhancements
-
-- Machine learning-based anomaly detection
-- Integration with SIEM platforms
-- Advanced threat intelligence feeds
-- Automated remediation workflows
-
-## Conclusion
-
-This security monitoring system demonstrates how cloud-native services can be leveraged to create robust, scalable security solutions. The combination of AWS CloudWatch, Secrets Manager, and SNS provides a solid foundation for real-time threat detection and response.
-
-The project successfully achieved:
-- 20% reduction in response time
-- 45% improvement in threat detection efficiency
-- Enhanced security posture through automated monitoring
-
-## Technologies Used
-
-- AWS CloudWatch
-- AWS Secrets Manager
-- Amazon SNS
-- AWS Lambda
-- Python
-- Terraform (Infrastructure as Code)
+**Author:** Gustavo Balaguera  
+**Email:** gustavobalaguera214@gmail.com
 
 ---
 
-*This project was completed as part of my cybersecurity portfolio at Stevens Institute of Technology. For more details or questions about the implementation, feel free to reach out.*
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_reghtjy)
+
+---
+
+## Introducing Today's Project!
+
+In this project, I will demonstrate how to build a powerful monitoring system using AWS to strengthen security and protect sensitive data. I'm doing this project to learn how to track and respond to access events effectively—an essential skill for roles like Security Engineer, DevOps Engineer, and Systems or Cloud Administrator.
+Through this project, I will:
+   - Set up AWS CloudTrail to monitor secret access events.
+   - Use AWS CloudWatch to log access attempts and trigger notifications.
+   - Create SNS alerts to receive notifications when secrets are accessed.
+   - Build and compare a second notification system to evaluate security effectiveness.
+By the end, I will gain hands-on experience in securing cloud environments and designing real-time security alert systems. 
+
+
+### Tools and concepts
+
+Services I used were AWS Secrets Manager, CloudTrail, CloudWatch Logs, CloudWatch Alarms, and Amazon SNS to build a security monitoring system.
+
+Key concepts I learned include secure secret storage, event tracking, automated alerts, and troubleshooting cloud-based monitoring setups. I gained hands-on experience in detecting unauthorized secret access, refining alarm settings, and integrating notification systems to enhance cloud security. This project demonstrated how AWS services work together to protect sensitive data and provide real-time security insights.
+
+### Project reflection
+
+This project took me about 2 hours to complete.
+
+---
+
+## Create a Secret
+
+Secrets Manager is a secure AWS service designed to store and manage sensitive information, such as passwords, API keys, and credentials. It provides automatic encryption and secret rotation, ensuring that confidential data remains protected without manual updates.
+
+You could use Secrets Manager to securely store database credentials, API keys, and other sensitive information, reducing the risk of exposure. Instead of hardcoding secrets into your applications or sharing them through unsecured channels, Secrets Manager centralizes secret storage and controls access through AWS IAM policies.
+
+To set up for my project, I created a secret called TopSecretInfo that contains a key-value pair. The key is "The Secret is", and the value is “rice is the best carb”. This secret is stored in AWS Secrets Manager, ensuring it remains secure and accessible for monitoring.
+
+By using Secrets Manager, I can manage sensitive data efficiently while leveraging AWS security features like encryption and controlled access policies. This setup will serve as the foundation for tracking access attempts and enhancing cloud security. 
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_o5p6q7r8)
+
+---
+
+## Set Up CloudTrail
+
+CloudTrail is a monitoring service that records activity across your AWS account, capturing details like who performed an action, when it happened, and where it originated. It provides valuable insights for security, troubleshooting, and compliance, helping detect unusual behavior, track changes, and maintain regulatory standards.
+
+I set up a trail to record and store account activity, ensuring that interactions are logged securely. By configuring CloudTrail to track access to Secrets Manager, I can identify unauthorized actions, investigate incidents, and strengthen security monitoring. This setup forms a critical part of my AWS security strategy. Time to configure it!
+
+CloudTrail events include Management, Data, Insights, and Network activity events, each tracking different AWS activities.
+   - Management events log administrative actions, such as accessing secrets or modifying IAM policies.
+   - Data events capture interactions with resources, like uploading files to S3.
+   - Insights events detect unusual patterns in account activity.
+   - Network activity events track changes in VPC configurations and traffic.
+
+These logs help with security, auditing, and compliance, ensuring visibility into important AWS operations.
+
+### Read vs Write Activity
+
+Read API activity involves viewing information without making changes, such as listing S3 buckets or describing EC2 instances. Write API activity involves modifying or retrieving sensitive data, including creating, deleting, or accessing a secret’s value.
+
+For this project, we need both Read and Write API activity enabled to track secret access effectively. Read will log metadata views, while Write ensures retrieval of the secret value is recorded for security monitoring. This distinction helps detect unauthorized access attempts and strengthens cloud security.
+
+---
+
+## Verifying CloudTrail
+
+I retrieved the secret in two ways:
+   - First, through AWS Secrets Manager console, where I navigated to my TopSecretInfo secret and selected Retrieve secret value to view its content.
+   - Second, using AWS CLI via CloudShell, where I ran the get-secret-value command to fetch the secret’s value in JSON format.
+
+By testing both methods, I ensured CloudTrail logs these access events, strengthening my ability to track and monitor secret usage. 
+
+
+To analyze my CloudTrail events, I visited the Event history page in the CloudTrail console and filtered by Event source: secretsmanager.amazonaws.com. I found GetSecretValue events, confirming that CloudTrail successfully logged the retrieval of my secret.
+
+This tells me that my monitoring system is working as expected, capturing access attempts and ensuring I can track who accessed sensitive data. With this visibility, I can detect unauthorized access and strengthen my cloud security strategy!
+
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_s8t9u0v1)
+
+---
+
+## CloudWatch Metrics
+
+CloudWatch Logs is an AWS service that collects, stores, and analyzes log data from various AWS resources, including CloudTrail. It's important for monitoring because it provides visibility into system activity, helps troubleshoot issues, and enables real-time alerts for critical security events like secret access.
+
+By integrating CloudTrail logs into CloudWatch Logs, I can track who accessed my secret, detect anomalies, and trigger automated responses when suspicious activity occurs. This setup strengthens security by ensuring I can respond swiftly to potential threats.
+
+CloudTrail's Event History is useful for quick investigations of recent events, providing a record of management actions over the past 90 days.
+
+While CloudWatch Logs are better for long-term storage and advanced monitoring, allowing custom alerts, automated responses, and powerful filtering to focus on critical security events. By storing logs in CloudWatch, I can track secret access over time and proactively detect suspicious activity.
+
+A CloudWatch metric is a measurement used to track specific patterns in log data.
+
+When setting up a metric, the metric value represents the action being tracked—in this case, a secret access event. We set it to 1 so that each time someone retrieves the secret, the counter increases.
+
+Default value is used when no matching events occur in a given period. Setting it to 0 ensures we capture both active and inactive periods, providing a complete view of secret access trends. This helps with security monitoring and alerting. 
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_a9b0c1d2)
+
+---
+
+## CloudWatch Alarm
+
+A CloudWatch alarm is a monitoring tool that triggers notifications based on metric thresholds.
+
+I set my CloudWatch alarm threshold to Greater/Equal to 1 so the alarm will trigger when my SecretIsAccessed metric detects at least one secret access attempt within a 5-minute period.
+
+This ensures I receive instant alerts whenever my secret is retrieved, helping me track access events and respond quickly to potential security threats. 
+
+I created an SNS topic along the way. An SNS topic is a messaging channel that allows AWS services to send notifications to multiple subscribers at once. Instead of sending individual alerts, it distributes messages efficiently to email addresses, SMS numbers, or even applications.
+
+My SNS topic is set up to send an email notification whenever CloudWatch detects that my secret is accessed. This ensures I receive an alert the moment a sensitive event occurs, helping me respond quickly to potential security threats.
+
+AWS requires email confirmation because it ensures that only the intended recipient subscribes to SNS notifications and prevents unauthorized subscriptions.
+
+This helps prevent spam, accidental subscriptions, and security risks, making sure that alerts are sent only to verified users. By confirming my email, I ensure that I receive important notifications about secret access events without unwanted interruptions. 
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_fsdghstt)
+
+---
+
+## Troubleshooting Notification Errors
+
+To test my monitoring system, I retrieved the secret value again in AWS Secrets Manager, expecting the CloudWatch alarm to trigger and send an SNS email notification.
+
+The results were unexpected—no email was received, meaning the alarm or SNS setup needs troubleshooting. I’ll check the CloudWatch alarm status, SNS subscription confirmation, and CloudTrail logs to ensure everything is correctly configured. Once resolved, my monitoring system will successfully alert me whenever the secret is accessed. 
+
+To test my monitoring system, I successfully set up CloudTrail, CloudWatch Logs, and SNS but noticed the CloudWatch alarm wasn’t triggering notifications as expected.
+
+I manually triggered the alarm using the AWS CloudShell command to set its state to ALARM, but no email arrived. This confirmed that the issue wasn’t with CloudTrail or SNS itself, but rather with how the alarm was being evaluated.
+
+To troubleshoot, I verified the alarm’s state, ensured my SNS subscription was confirmed, checked the exact alarm name in my command, and waited for possible delays.
+
+Finally, I adjusted the CloudWatch alarm settings by changing Statistic from Average to Sum, ensuring secret access events were counted correctly. I also reduced the Period from 5 minutes to 1 minute for faster notifications. With these updates, my monitoring system should now trigger email alerts reliably!
+
+I initially didn't receive an email before because my CloudWatch alarm was not evaluating secret access events correctly. The alarm was set to use Average instead of Sum, meaning secret access events weren’t crossing the threshold for triggering notifications.
+
+The key solution was changing the alarm’s Statistic setting to Sum so every secret access counted properly. Additionally, reducing the Period from 5 minutes to 1 minute ensured faster detection and notification delivery.
+
+---
+
+## Success!
+
+To validate that my monitoring system works, I retrieved the secret value again in AWS Secrets Manager, triggering an event that CloudTrail recorded.
+
+I checked the CloudWatch console and confirmed that my Secret is accessed alarm entered the In alarm state, verifying that the metric filter correctly detected the access.
+
+I received an email notification from AWS SNS with the subject "ALARM: SecretIsAccessedAlarm", confirming that the monitoring system successfully alerted me to the secret access event. 
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-monitoring_ageraergearge)
+
+---
+
+*This project was possible thanks to the amazing people at Nextwork. For more details or questions about the implementation, feel free to check them out!*
       `,
-      category: 'Cloud Security',
+      category: 'Cloud Security with AWS IAM',
       tags: ['AWS', 'CloudWatch', 'Security', 'Monitoring', 'Python'],
-      created_at: '2024-12-15',
-      updated_at: '2024-12-15',
+      created_at: '2025-06-09',
+      updated_at: '2025-06-09',
       read_time: 8
     },
     'cloud-security-framework-aws-iam': {
       id: '2',
-      title: 'Cloud Security Framework with AWS IAM: Implementing Zero-Trust Architecture',
+      title: 'Cloud Security Framework with AWS IAM',
       slug: 'cloud-security-framework-aws-iam',
-      excerpt: 'Learn how to build a robust cloud security framework using AWS IAM, implementing zero-trust principles and role-based access control for enhanced security compliance.',
+      excerpt: 'Learn how to build a robust cloud security framework using AWS IAM, implementing role-based access control for enhanced security compliance.',
       content: `
-# Cloud Security Framework with AWS IAM: Implementing Zero-Trust Architecture
+# Cloud Security with AWS IAM
 
-## Introduction
-
-In the era of cloud computing, traditional perimeter-based security models are no longer sufficient. This project demonstrates the implementation of a zero-trust security framework using AWS Identity and Access Management (IAM) services.
-
-## Zero-Trust Principles
-
-### Core Concepts
-
-1. **Never Trust, Always Verify**: Every access request is authenticated and authorized
-2. **Least Privilege Access**: Users receive minimum necessary permissions
-3. **Assume Breach**: Design systems assuming compromise has occurred
-4. **Continuous Monitoring**: Real-time verification of access patterns
-
-## Implementation Strategy
-
-### 1. IAM Policy Architecture
-
-The framework implements a hierarchical policy structure:
-
-\`\`\`json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeInstances",
-        "ec2:DescribeSecurityGroups"
-      ],
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestedRegion": "us-east-1"
-        }
-      }
-    }
-  ]
-}
-\`\`\`
-
-### 2. Role-Based Access Control (RBAC)
-
-Implemented granular roles for different user types:
-
-- **Security Administrators**: Full security management
-- **System Operators**: Limited operational access
-- **Developers**: Development environment access
-- **Auditors**: Read-only compliance access
-
-### 3. EC2 Instance Hardening
-
-**Achievement**: Reduced unauthorized access risks by 30% through:
-
-- Instance-level IAM roles
-- Security group restrictions
-- Network ACL configurations
-- Regular security assessments
-
-## Security Compliance Improvements
-
-### Compliance Framework
-
-The implementation increased security compliance by 20% through:
-
-1. **Automated Policy Enforcement**
-2. **Regular Access Reviews**
-3. **Compliance Monitoring**
-4. **Audit Trail Maintenance**
-
-### Monitoring and Alerting
-
-Integrated CloudTrail for comprehensive logging:
-
-\`\`\`python
-import boto3
-import json
-
-def analyze_access_patterns():
-    cloudtrail = boto3.client('cloudtrail')
-    
-    response = cloudtrail.lookup_events(
-        LookupAttributes=[
-            {
-                'AttributeKey': 'EventName',
-                'AttributeValue': 'AssumeRole'
-            }
-        ]
-    )
-    
-    return response['Events']
-\`\`\`
-
-## Technical Implementation
-
-### Infrastructure as Code
-
-Used Terraform for consistent deployments:
-
-\`\`\`hcl
-resource "aws_iam_role" "security_role" {
-  name = "SecurityAdministrator"
-  
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
-\`\`\`
-
-### Automated Compliance Monitoring
-
-Developed automated systems for:
-
-- Policy compliance checking
-- Access pattern analysis
-- Anomaly detection
-- Reporting and alerting
-
-## Results and Impact
-
-### Security Improvements
-
-1. **30% Reduction** in unauthorized access risks
-2. **20% Increase** in security compliance
-3. **Automated** policy enforcement
-4. **Real-time** threat detection
-
-### Operational Benefits
-
-- Simplified access management
-- Reduced administrative overhead
-- Improved audit capabilities
-- Enhanced incident response
-
-## Best Practices Implemented
-
-### IAM Security
-
-1. **Multi-Factor Authentication** for all privileged accounts
-2. **Regular Access Reviews** and cleanup
-3. **Principle of Least Privilege** enforcement
-4. **Automated Policy Validation**
-
-### Monitoring and Logging
-
-- Comprehensive CloudTrail logging
-- Real-time alerting for suspicious activities
-- Regular security assessments
-- Automated compliance reporting
-
-## Challenges and Solutions
-
-### Challenge: Complex Permission Management
-
-**Solution**: Implemented policy templates and automated validation
-
-### Challenge: Scalability
-
-**Solution**: Used IAM groups and roles for efficient management
-
-### Challenge: Compliance Tracking
-
-**Solution**: Automated compliance monitoring and reporting
-
-## Future Enhancements
-
-1. **Machine Learning** for anomaly detection
-2. **Advanced Threat Intelligence** integration
-3. **Zero-Trust Network Access** implementation
-4. **Enhanced Automation** capabilities
-
-## Conclusion
-
-This cloud security framework demonstrates how AWS IAM can be leveraged to implement robust zero-trust architecture. The project successfully enhanced security posture while maintaining operational efficiency.
-
-Key achievements:
-- 30% reduction in unauthorized access risks
-- 20% improvement in security compliance
-- Automated compliance monitoring system
-- Comprehensive audit and reporting capabilities
-
-## Technologies Used
-
-- AWS IAM
-- Amazon EC2
-- AWS CloudTrail
-- Python
-- Terraform
-- JSON/YAML
+**Author:** Gustavo Balaguera  
+**Email:** gustavobalaguera214@gmail.com
 
 ---
 
-*This project showcases advanced cloud security implementation as part of my cybersecurity studies at Stevens Institute of Technology.*
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_1c864649)
+
+---
+
+## Introducing Today's Project!
+
+In this project, I will demonstrate how to set up and manage AWS cloud resources using Identity and Access Management (IAM) for authentication and authorization. Specifically, I will:
+   - Launch an EC2 instance, a virtual machine running in the AWS cloud.
+   - Create IAM policies to define access permissions.
+   - Set up IAM users and user groups to control resource access.
+   - Assign an AWS account alias for better account personalization.
+
+I'm doing this project because it provides hands-on experience with AWS fundamentals and strengthens my cloud security skills. By working through this challenge, I will gain a deeper understanding of IAM principles, improve my ability to manage cloud resources effectively, and build a strong foundation for future AWS projects.
+
+
+### Tools and concepts
+
+This project was packed with essential AWS IAM and EC2 concepts. Here are the key takeaways:
+
+1. AWS IAM (Identity and Access Management) – Controlled user authentication and permissions.
+ 
+2. IAM Policies – Defined access rules using JSON-based permission structures.
+ 
+3. IAM User Groups – Managed permissions efficiently by grouping users.
+ 
+4. IAM Users – Created individual user identities for secure AWS access.
+ 
+5. AWS Account Alias – Simplified login URLs for user-friendly access.
+ 
+6. Amazon EC2 Instances – Launched and managed cloud-based virtual machines.
+ 
+7. Environment Tagging – Used tags (Env: production and Env: development) to structure resources.
+ 
+8. Access Testing – Verified IAM policies by attempting actions on restricted and allowed instances.
+
+By applying these concepts, I successfully secured user access, organized cloud resources, and validated IAM policy enforcement. 
+
+### Project reflection
+
+This project took me approximately 90 mins.
+
+---
+
+## Tags
+
+Tags are metadata labels that help organize and manage AWS resources efficiently. They allow users to categorize instances based on attributes like environment, project, owner, or purpose.
+
+In this project, tags serve multiple key functions:
+   - Resource identification: Tags make it easier to filter and locate specific instances, especially in large-scale deployments.
+   - Cost allocation: By tagging resources, AWS users can track expenses associated with different projects or departments.
+   - Access control and policies: Tags help enforce security rules by defining permissions based on environment types (e.g., production vs. development).
+
+By tagging our EC2 instances with Env: production and Env: development, we're ensuring structured organization for effective management and policy enforcement.
+
+For my two EC2 instances, I’ve assigned the following tags:
+
+1. Production Environment Instance
+   Name: nextwork-prod-Gustavo
+   Key: Env
+   Value: production
+2. Development Environment Instance
+   Name: nextwork-dev-Gustavo
+   Key: Env
+   Value: development
+
+These tags help organize and differentiate my instances based on their role in the system. The Env tag allows easy filtering, cost tracking, and policy enforcement based on whether the instance is used in production or development.
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_2e0e5a5d)
+
+---
+
+## IAM Policies
+
+IAM policies define permissions for AWS users, groups, or roles by specifying who can perform actions on which resources and under what conditions. These policies ensure secure access control by allowing or denying specific operations, such as starting or stopping an EC2 instance.
+
+Using IAM policies, I can:
+   - Grant least privilege access: Ensure users only have permissions necessary for their role.
+   - Restrict sensitive actions: Prevent unintended changes to critical resources.
+   - Automate security enforcement: Apply policies dynamically to maintain governance.
+
+### The policy I set up
+
+I set up the policy using JSON. The JSON method provides more granular control over permissions, allowing me to precisely define actions, resources, and conditions in a structured format. This ensures that the intern has access only to the development EC2 instance while maintaining security for the production environment.
+
+The effect of my policy is to control access to EC2 instances based on their environment tag. Specifically, it: 
+   1. Allows all actions (ec2:*) on EC2 instances only if they have the tag "Env = development". This ensures the intern can manage development instances but not production ones. 
+   2. Allows all ec2:Describe* actions across all instances, meaning the intern can view details of instances without modifying them. 
+   3. Denies ec2:DeleteTags and ec2:CreateTags actions across all instances. This prevents the intern from modifying resource tags, which helps maintain environment integrity.
+
+By enforcing these rules, I ensure that the intern has sufficient access to perform their development tasks while protecting the production environment from unintended changes.
+
+
+### When creating a JSON policy, you have to define its Effect, Action and Resource.
+
+In a JSON IAM policy, these three elements define who can do what to which AWS resources:
+
+1. Effect – Determines whether the policy allows or denies an action.
+   - "Effect": "Allow" → Grants permission to perform the specified actions.
+   - "Effect": "Deny" → Explicitly blocks the actions, even if another policy allows them.
+
+2. Action – Specifies which AWS operations the policy controls.
+   - "Action": "ec2:*" → Grants access to all EC2 actions (e.g., start, stop, modify).
+   - "Action": "ec2:Describe*" → Grants access only to read-related EC2 actions (e.g., view details).
+
+3. Resource – Defines which AWS resources the policy applies to.
+   - "Resource": "*" → Applies the policy to all EC2 instances.
+   - "Resource": "arn:aws:ec2:region:account-id:instance/instance-id" → Limits access to a specific EC2 instance.
+
+These elements together ensure security and proper access control in AWS.
+
+
+---
+
+## My JSON Policy
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_1c864649)
+
+---
+
+## Account Alias
+
+An Account Alias is a user-friendly name that replaces the default AWS account ID in the sign-in URL. Instead of using a long string of numbers, the alias makes it easier for users to access and remember the login page.
+
+By setting the alias to nextwork-alias-gustavo-balaguera, I am ensuring that the account sign-in URL is more intuitive, making onboarding smoother while maintaining security.
+
+Creating an account alias took me no more than 30 seconds. Now, my new AWS console sign-in URL is https://nextwork-alias-gustavo-balaguera.signin.aws.amazon.com/console
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_0eb4439b)
+
+---
+
+## IAM Users and User Groups
+
+### Users
+
+IAM users are individual identities in AWS that represent specific people or applications needing access to resources. Each IAM user has unique credentials (such as a username and password) that allow them to sign in to the AWS Management Console or interact with AWS services through other methods like APIs and CLI.
+
+By creating an IAM user, I ensure that: 
+   1. The new intern has personalized access without using shared credentials.
+   2. Permissions can be strictly controlled based on the IAM policies attached to their user or group.
+   3. Access is traceable, helping with security monitoring and audits.
+
+Since I added the intern to nextwork-dev-group, they automatically inherit its permissions, ensuring they can work within the development environment without affecting production resources.
+
+### User Groups
+
+IAM user groups are collections of IAM users that simplify permission management. Instead of assigning permissions to individual users, you can attach policies to the entire group, ensuring consistency across multiple users.
+
+By using user groups, I can:
+  - Efficiently manage permissions for multiple users at once.
+   - Ensure consistency in access control across similar roles.
+   - Simplify onboarding for new users like NextWork interns.
+
+In this case, I created nextwork-dev-group and attached the NextWorkDevEnvironmentPolicy to it. Now, any intern added to this group will automatically have access to the development environment while remaining restricted from production resources.
+
+Attaching NextWorkDevEnvironmentPolicy to nextwork-dev-group ensures that every IAM user added to this group automatically inherits the defined permissions.
+This means: 
+   1. Interns gain access to the development EC2 instance but remain restricted from production resources.
+   2. Simplified management: Instead of assigning permissions individually, all interns in the group receive the same controlled access.
+   3. Future-proofing:  If new interns join, they can be added to the group without needing manual policy adjustments.
+
+This setup enforces security best practices while making access control efficient.
+
+
+---
+
+## Logging in as an IAM User
+
+There are two main ways to share a new IAM user's sign-in details securely:
+
+1. Download the credentials file – After creating the user, AWS provides an option to download a CSV file containing their login details. This file includes the username, password, and sign-in link. You can securely send this file to the user through an encrypted email or a secure internal communication platform.
+
+2. Manually share credentials – You can provide the sign-in URL, username, and temporary password directly to the user through a secure channel, like a password manager or a company-approved encrypted messaging tool. This method allows more direct control over communication.
+
+Regardless of the method, it’s crucial to ensure secure handling of credentials to prevent unauthorized access.
+
+As I logged in as the dev user, I observed several Access Denied notifications across various AWS console panels. This indicates that the IAM policy I set up is working correctly and is restricting access to unauthorized resources while allowing interaction with permitted ones.
+
+Key observations: 
+   1. Limited access to production instances – The policy correctly prevents the dev user from modifying or viewing the production environment.
+
+    2. Ability to interact with development instances – The user should be able to start, stop, and manage EC2 instances tagged with "Env = development".
+
+    3. Restricted actions – Actions like modifying tags or deleting resources are blocked, ensuring security and preventing accidental changes.
+
+This confirms that the intern will have controlled access to AWS resources without compromising sensitive infrastructure.
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_6f2ab446)
+
+---
+
+## Testing IAM Policies
+
+On my two EC2 instances, I performed the following actions:
+
+1. Production Instance: Attempted to stop the instance, but received an "Access Denied" error because my IAM policy prevents modifications to production-tagged resources.
+2. Development Instance: Successfully stopped the instance, as my IAM policy allows full control over resources tagged with "Env = development".
+
+This confirms that the IAM policy is correctly enforcing access control, ensuring the intern can work within the development environment while keeping production secure.
+
+### Stopping the production instance
+
+When I tried to stop the production instance, an "Access Denied" banner appeared at the top of the page, preventing me from completing the action. This happened because my IAM policy explicitly restricts the intern’s permissions to instances tagged with "Env = production" while allowing full access only to instances labeled "Env = development".
+
+This confirms that the IAM policy is working as intended, ensuring that interns cannot modify production resources, protecting the integrity of the live environment. The intern can still manage the development instance for testing purposes without impacting operational systems.
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_0e7a9d6a)
+
+---
+
+## Testing IAM Policies
+
+### Stopping the development instance
+
+When I attempted to stop the development instance, the action was successful because my IAM policy allows full access to instances tagged with "Env = development". Unlike the production instance, which triggered an "Access Denied" error, this instance was correctly configured for the intern's permissions, enabling them to manage it as intended.
+
+This confirms that the IAM setup is working properly, ensuring controlled access while maintaining security.
+
+
+![Image](http://learn.nextwork.org/authentic_brown_happy_nectarine/uploads/aws-security-iam_1811801c)
+
+---
+
+This project was possible thanks to the amazing people at Nextwork. For more details or questions about the implementation, feel free to check them out!
       `,
       category: 'Cloud Security',
-      tags: ['AWS', 'IAM', 'Zero-Trust', 'Security', 'Terraform'],
-      created_at: '2024-12-10',
-      updated_at: '2024-12-10',
-      read_time: 12
-    },
-    'optimized-shopify-website': {
-      id: '3',
-      title: 'Optimizing Shopify Performance: A Complete Guide to Speed and SEO',
-      slug: 'optimized-shopify-website',
-      excerpt: 'Complete guide to optimizing Shopify websites for performance, security, and SEO. Learn how to improve Core Web Vitals and boost search rankings.',
-      content: `
-# Optimizing Shopify Performance: A Complete Guide to Speed and SEO
-
-## Project Overview
-
-This case study details the complete optimization of a luxury Italian menswear e-commerce website built on Shopify. The project focused on performance enhancement, SEO improvement, and customer experience optimization.
-
-## Initial Assessment
-
-### Performance Baseline
-
-Before optimization:
-- **Largest Contentful Paint (LCP)**: 4.2 seconds
-- **First Input Delay (FID)**: 180ms
-- **Cumulative Layout Shift (CLS)**: 0.25
-- **SEO Ranking**: Position 20.7 (average)
-
-### Identified Issues
-
-1. Unoptimized images and assets
-2. Excessive JavaScript execution
-3. Poor mobile responsiveness
-4. Inadequate SEO structure
-5. Slow server response times
-
-## Performance Optimization Strategy
-
-### 1. Core Web Vitals Improvement
-
-**Largest Contentful Paint (LCP) Optimization**
-
-Achieved 35% improvement through:
-
-\`\`\`liquid
-<!-- Optimized image loading -->
-{% assign image_size = '800x' %}
-{% if product.featured_image %}
-  <img 
-    src="{{ product.featured_image | img_url: image_size }}"
-    alt="{{ product.featured_image.alt | escape }}"
-    loading="lazy"
-    width="800"
-    height="600"
-  >
-{% endif %}
-\`\`\`
-
-**Key Techniques:**
-- Image optimization and compression
-- Lazy loading implementation
-- Critical CSS inlining
-- Font optimization
-
-### 2. JavaScript Performance
-
-Optimized JavaScript execution:
-
-\`\`\`javascript
-// Deferred loading for non-critical scripts
-function loadScript(src, callback) {
-  const script = document.createElement('script');
-  script.src = src;
-  script.async = true;
-  script.onload = callback;
-  document.head.appendChild(script);
-}
-
-// Load analytics after page interaction
-document.addEventListener('click', function() {
-  loadScript('/assets/analytics.js');
-}, { once: true });
-\`\`\`
-
-### 3. CSS Optimization
-
-Implemented critical CSS strategy:
-
-\`\`\`css
-/* Critical above-the-fold styles */
-.hero-section {
-  background-image: url('hero-optimized.webp');
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-/* Non-critical styles loaded asynchronously */
-@media (min-width: 768px) {
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-}
-\`\`\`
-
-## SEO Enhancement Strategy
-
-### 1. Technical SEO
-
-**Achievement**: Improved SEO ranking by 43% (position 20.7 to 11.8)
-
-Implemented comprehensive SEO structure:
-
-\`\`\`liquid
-<!-- Enhanced meta tags -->
-<title>{{ page_title }}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
-<meta name="description" content="{{ page_description | default: shop.description | truncate: 160 }}">
-
-<!-- Open Graph tags -->
-<meta property="og:title" content="{{ page_title }}">
-<meta property="og:description" content="{{ page_description | truncate: 160 }}">
-<meta property="og:image" content="{{ featured_image | img_url: '1200x630' }}">
-
-<!-- Schema markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "{{ product.title }}",
-  "description": "{{ product.description | strip_html | truncate: 160 }}",
-  "image": "{{ product.featured_image | img_url: 'master' }}",
-  "offers": {
-    "@type": "Offer",
-    "price": "{{ product.price | money_without_currency }}",
-    "priceCurrency": "{{ shop.currency }}"
-  }
-}
-</script>
-\`\`\`
-
-### 2. Content Optimization
-
-- Optimized product descriptions
-- Enhanced category pages
-- Improved internal linking
-- Mobile-first content strategy
-
-### 3. Site Structure
-
-Implemented hierarchical URL structure:
-- \`/collections/category/subcategory\`
-- \`/products/product-name\`
-- \`/pages/content-page\`
-
-## Customer Experience Enhancement
-
-### 1. Targeted Marketing Implementation
-
-**Achievement**: Drove $2.5K average order value through customer segmentation
-
-Klaviyo integration for personalized marketing:
-
-\`\`\`javascript
-// Customer segmentation tracking
-klaviyo.track('Viewed Product', {
-  'Product Name': '{{ product.title }}',
-  'Product ID': '{{ product.id }}',
-  'Categories': {{ product.tags | json }},
-  'Price': {{ product.price | money_without_currency }},
-  'Brand': '{{ product.vendor }}'
-});
-
-// Abandoned cart recovery
-klaviyo.track('Added to Cart', {
-  'Product Name': '{{ item.product.title }}',
-  'Quantity': {{ item.quantity }},
-  'Price': {{ item.price | money_without_currency }}
-});
-\`\`\`
-
-### 2. Mobile Optimization
-
-Responsive design improvements:
-
-\`\`\`css
-/* Mobile-first approach */
-.product-card {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-  .product-card {
-    width: calc(50% - 1rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .product-card {
-    width: calc(33.333% - 1rem);
-  }
-}
-\`\`\`
-
-## Security Enhancements
-
-### XSS Vulnerability Prevention
-
-Implemented input validation and sanitization:
-
-\`\`\`liquid
-<!-- Safe output with escape filters -->
-{{ user_input | escape }}
-
-<!-- Form validation -->
-<form action="/contact" method="post">
-  <input 
-    type="text" 
-    name="name" 
-    required 
-    pattern="[A-Za-z\\s]+"
-    title="Please enter a valid name"
-  >
-  <input 
-    type="email" 
-    name="email" 
-    required
-    title="Please enter a valid email address"
-  >
-</form>
-\`\`\`
-
-## Results and Impact
-
-### Performance Metrics
-
-**Before vs After:**
-- **LCP**: 4.2s → 2.7s (35% improvement)
-- **FID**: 180ms → 95ms (47% improvement)
-- **CLS**: 0.25 → 0.08 (68% improvement)
-- **Page Speed Score**: 45 → 78
-
-### SEO Improvements
-
-- **Ranking**: Position 20.7 → 11.8 (43% improvement)
-- **Organic Traffic**: +65% increase
-- **Click-through Rate**: +28% improvement
-- **Bounce Rate**: -23% reduction
-
-### Business Impact
-
-- **Average Order Value**: $2.5K through targeted marketing
-- **Conversion Rate**: +18% improvement
-- **Customer Satisfaction**: +32% increase
-- **Mobile Sales**: +45% increase
-
-## Tools and Technologies Used
-
-### Development Stack
-- **Shopify Liquid** templating
-- **JavaScript ES6+** for interactions
-- **CSS3** with modern features
-- **Webpack** for asset bundling
-
-### Optimization Tools
-- **Google PageSpeed Insights**
-- **GTmetrix** for performance monitoring
-- **Lighthouse** for auditing
-- **Klaviyo** for email marketing
-
-### SEO Tools
-- **Google Search Console**
-- **SEMrush** for keyword research
-- **Screaming Frog** for site auditing
-- **Schema.org** markup
-
-## Best Practices Implemented
-
-### Performance
-1. **Image Optimization**: WebP format, lazy loading
-2. **Code Splitting**: Separate critical and non-critical code
-3. **Caching Strategy**: Browser and CDN caching
-4. **Minification**: CSS, JavaScript, and HTML
-
-### SEO
-1. **Keyword Research**: Targeted long-tail keywords
-2. **Content Strategy**: High-quality, relevant content
-3. **Technical SEO**: Proper markup and structure
-4. **Local SEO**: Location-based optimization
-
-### Security
-1. **Input Validation**: Server and client-side validation
-2. **HTTPS Enforcement**: SSL certificate implementation
-3. **Content Security Policy**: XSS protection
-4. **Regular Updates**: Platform and plugin updates
-
-## Lessons Learned
-
-### Technical Insights
-1. **Performance Budget**: Set and maintain performance budgets
-2. **Progressive Enhancement**: Build for all devices and connections
-3. **Monitoring**: Continuous performance monitoring is essential
-4. **User Experience**: Performance directly impacts user satisfaction
-
-### Business Insights
-1. **ROI of Optimization**: Performance improvements drive revenue
-2. **Mobile-First**: Mobile optimization is crucial for e-commerce
-3. **Data-Driven Decisions**: Use analytics to guide optimization
-4. **Customer Segmentation**: Personalization increases engagement
-
-## Future Enhancements
-
-### Technical Roadmap
-1. **Progressive Web App** implementation
-2. **Advanced Caching** strategies
-3. **AI-Powered** personalization
-4. **Voice Search** optimization
-
-### Business Roadmap
-1. **International Expansion** optimization
-2. **Advanced Analytics** implementation
-3. **Customer Journey** optimization
-4. **Omnichannel** integration
-
-## Conclusion
-
-This Shopify optimization project demonstrates the significant impact that comprehensive performance and SEO improvements can have on e-commerce success. Through systematic optimization of Core Web Vitals, SEO structure, and customer experience, we achieved substantial improvements in both technical metrics and business outcomes.
-
-**Key Achievements:**
-- 35% improvement in Largest Contentful Paint
-- 43% improvement in SEO rankings
-- $2.5K average order value through targeted marketing
-- Enhanced security through XSS vulnerability prevention
-
-The project showcases the importance of a holistic approach to e-commerce optimization, combining technical excellence with business strategy to deliver measurable results.
-
----
-
-*This project was completed as part of my role as IT Strategist at Riflessi, demonstrating practical application of web development and digital marketing skills.*
-      `,
-      category: 'Web Development',
-      tags: ['Shopify', 'Performance', 'SEO', 'JavaScript', 'Liquid'],
-      created_at: '2024-12-05',
-      updated_at: '2024-12-05',
-      read_time: 10
+      tags: ['AWS', 'IAM', 'Security'],
+      created_at: '2025-06-10',
+      updated_at: '2025-06-10',
+      read_time: 8
     }
   };
 

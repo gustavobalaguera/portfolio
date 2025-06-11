@@ -40,12 +40,12 @@ const Hero = () => {
           </h1>
           
           <p className="text-xl sm:text-2xl text-primary-200 mb-4 font-light animate-slide-left animate-delay-400">
-            Cybersecurity Professional
+            Aspiring Cybersecurity Professional
           </p>
           
           <p className="text-lg text-secondary-300 mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-right animate-delay-600">
-            Full-time student at Stevens Institute of Technology specializing in cloud security, 
-            network defense, and secure application development. Top 2% nationally in cybersecurity competitions.
+            Full-time student at Stevens Institute of Technology specializing in ethical hacking, 
+            network defense, and penetration testing. Top 2% nationally in cybersecurity competitions from CyberStart America.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 animate-scale-in animate-delay-800">

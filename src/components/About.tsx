@@ -15,8 +15,8 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mb-8 animate-scale-in animate-delay-200"></div>
           <p className="text-xl text-secondary-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animate-delay-300">
-            Passionate cybersecurity professional with extensive knowledge from leading institutions 
-            and hands-on experience in secure application development.
+            A passionate cybersecurity practitioner with sharp technical skills and a forward-thinking mindset, 
+            dedicated to protecting digital systems and driving innovative, secure solutions.
           </p>
         </div>
 
@@ -27,7 +27,7 @@ const About = () => {
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                 <img 
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                  src="src\assets\Me_Background.png" 
                   alt="Gustavo Balaguera - Professional Photo"
                   className="relative w-48 h-48 lg:w-56 lg:h-56 object-cover rounded-2xl border-2 border-primary-500/20 shadow-2xl group-hover:scale-105 transition-transform duration-300"
                 />
@@ -37,14 +37,13 @@ const About = () => {
                 <p className="text-lg text-secondary-200 leading-relaxed">
                   I'm a dedicated cybersecurity student at <span className="text-primary-400 font-semibold">Stevens Institute of Technology</span>, 
                   with specialized knowledge gained through the <span className="text-primary-400 font-semibold">SANS Technology Institute</span> and 
-                  <span className="text-primary-400 font-semibold"> National Cyber Scholarship Foundation</span>. My passion lies in creating secure, 
-                  robust systems that protect against evolving cyber threats.
+                  <span className="text-primary-400 font-semibold"> National Cyber Scholarship Foundation</span>. 
+                  My passion lies in penetration testing and uncovering vulnerabilities in systems and applications to strengthen digital defenses from the inside out.
                 </p>
                 
                 <p className="text-lg text-secondary-200 leading-relaxed">
-                  Currently expanding my expertise through <span className="text-primary-400 font-semibold">PortSwigger</span> and 
-                  <span className="text-primary-400 font-semibold"> KC7 Foundation</span>, I apply theoretical knowledge to real-world scenarios, 
-                  developing secure applications and implementing defense-in-depth strategies.
+                  I continue to develop my skills with <span className="text-primary-400 font-semibold">PortSwigger</span>, constantly applying my learnings in CTF challenges like <span className="text-primary-400 font-semibold">PicoCTF</span> and bug bounty programs. 
+                  Through these real world tests, I've successfully identified and reported a (repeat 🤷‍♂️) SQL injection vulnerability in a website's search query.
                 </p>
 
                 <p className="text-lg text-secondary-200 leading-relaxed">
@@ -55,8 +54,7 @@ const About = () => {
 
                 <p className="text-lg text-secondary-200 leading-relaxed">
                   I'm actively seeking internships and programs where I can contribute to cybersecurity 
-                  initiatives while continuing to grow my technical skills in cloud security, 
-                  network defense, and secure software development.
+                  initiatives while continuing to grow my technical skills in ethical hacking and related topics.
                 </p>
               </div>
             </div>
@@ -89,7 +87,7 @@ const About = () => {
               {
                 icon: Code,
                 title: "Programming",
-                subtitle: "Python, Java, JavaScript",
+                subtitle: "Python, Java, JavaScript, C, C++",
                 description: "Security-focused Development",
                 color: "primary"
               },
@@ -123,13 +121,13 @@ const About = () => {
             <h3 className="text-3xl font-bold mb-4">Shopify Partner Services</h3>
             <p className="text-xl opacity-90 mb-6">Professional Web Development & SEO Optimization</p>
             <p className="text-sm opacity-75 max-w-3xl mx-auto leading-relaxed mb-8">
-              As a certified Shopify Partner, I offer part-time web development services including theme customization, 
+              As a Shopify Partner, I offer part-time web development services including theme customization, 
               website appearance optimization, and comprehensive SEO recommendations. I'm not limited to Shopify - 
-              I work with various platforms to enhance your online presence. Let's discuss your website needs and 
+              I work with various static websites to enhance your online presence. Let's discuss your website needs and 
               find a solution that fits your budget.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              {['Theme Customization', 'SEO Optimization', 'Performance Enhancement', 'Mobile Responsiveness', 'Custom Development'].map((service, index) => (
+              {['Theme Customization', 'SEO Optimization', 'Performance Enhancement', 'Page Indexing', 'Custom Development'].map((service, index) => (
                 <span key={index} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium">
                   {service}
                 </span>

@@ -10,21 +10,8 @@ const Skills = () => {
         { name: "Python", level: 95 },
         { name: "Java", level: 85 },
         { name: "JavaScript", level: 75 },
-        { name: "PHP", level: 64 },
-        { name: "HTML/CSS", level: 85 },
+        { name: "HTML/CSS", level: 90 },
         { name: "C/C++", level: 70 }
-      ]
-    },
-    {
-      title: "Cloud Technologies",
-      icon: Cloud,
-      skills: [
-        { name: "AWS EC2", level: 85 },
-        { name: "AWS S3", level: 80 },
-        { name: "AWS IAM", level: 90 },
-        { name: "CloudWatch", level: 85 },
-        { name: "Secrets Manager", level: 80 },
-        { name: "AWS QuickSight", level: 75 }
       ]
     },
     {
@@ -33,10 +20,10 @@ const Skills = () => {
       skills: [
         { name: "TCP/IP", level: 93 },
         { name: "NIST Framework", level: 90 },
-        { name: "Defense in Depth", level: 85 },
+        { name: "Defense in Depth", level: 78 },
         { name: "WireShark", level: 85 },
         { name: "Burp Suite", level: 82 },
-        { name: "SIEM", level: 80 }
+        { name: "SIEM", level: 60 }
       ]
     },
     {
@@ -71,7 +58,7 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <div key={index} className={`bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-500 animate-slide-${index % 2 === 0 ? 'left' : 'right'} animate-delay-${(index + 4) * 100}`}>
               <div className="flex items-center mb-8">
@@ -151,7 +138,11 @@ const Skills = () => {
                 "Computer, Technology, And Security Foundations",
                 "Network, Endpoint, And Cloud",
                 "Web Programming And Project Development",
-                "Computer Hardware, Exploitation, & Operating Systems Fundamentals"
+                "Computer Hardware, Exploitation, & Operating Systems Fundamentals",
+                "Web Programming & Web Development",
+                "Computer Architecture & Organization",
+                "Systems Programming",
+                "Software Development Process"
               ].map((course, index) => (
                 <div key={index} className={`bg-secondary-700/50 rounded-xl p-4 hover:bg-secondary-700/70 transition-colors duration-300 animate-scale-in animate-delay-${(index + 13) * 50}`}>
                   <p className="text-secondary-200 font-medium text-sm">{course}</p>

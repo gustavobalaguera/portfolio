@@ -11,10 +11,12 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-secondary-950 text-white overflow-x-hidden">
         <Header />
         <Routes>

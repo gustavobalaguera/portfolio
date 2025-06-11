@@ -147,7 +147,7 @@ const Experience = () => {
                 </div>
                 <div>
                   <h4 className="text-xl font-semibold text-white">SANS Technology Institute</h4>
-                  <p className="text-primary-400 font-medium">SEC401: Security Essentials</p>
+                  <p className="text-primary-400 font-medium">Certification - GIAC Foundational Cybersecurity Technologies (GFACT)</p>
                 </div>
               </div>
               <p className="text-secondary-400">June 2023 - Sept. 2023</p>

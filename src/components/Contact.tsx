@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Mail, Linkedin, Github, Phone, MapPin, Send, ExternalLink, CheckCircle, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,34 +17,18 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject,
-            message: formData.message
-          }
-        ]);
-
-      if (error) {
-        console.error('Supabase error:', error);
-        throw error;
-      }
-
+      // Create mailto link for contact
+      const mailtoLink = `mailto:gustavobalaguera214@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      
+      window.open(mailtoLink, '_blank');
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error with contact form:', error);
       setSubmitStatus('error');
-      
-      // Fallback to mailto
-      const mailtoLink = `mailto:gustavobalaguera214@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )}`;
-      window.open(mailtoLink, '_blank');
     } finally {
       setIsSubmitting(false);
     }
@@ -165,14 +148,14 @@ const Contact = () => {
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center gap-3">
                   <CheckCircle className="h-5 w-5 text-green-400" />
-                  <p className="text-green-300">Message sent successfully! I'll get back to you soon.</p>
+                  <p className="text-green-300">Your email client should open with the message. If not, please email me directly.</p>
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3">
                   <AlertCircle className="h-5 w-5 text-red-400" />
-                  <p className="text-red-300">There was an error sending your message. Please try the email link above.</p>
+                  <p className="text-red-300">Please email me directly at gustavobalaguera214@gmail.com</p>
                 </div>
               )}
               
@@ -251,19 +234,19 @@ const Contact = () => {
                   {isSubmitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
+                      Opening Email...
                     </>
                   ) : (
                     <>
                       <Send className="h-5 w-5" />
-                      Send Message
+                      Send via Email
                     </>
                   )}
                 </button>
               </form>
 
               <p className="text-xs text-secondary-400 mt-6 text-center">
-                This form is powered by Supabase. You can also email me directly at{' '}
+                This form will open your email client. You can also email me directly at{' '}
                 <a href="mailto:gustavobalaguera214@gmail.com" className="text-primary-400 hover:underline">
                   gustavobalaguera214@gmail.com
                 </a>
