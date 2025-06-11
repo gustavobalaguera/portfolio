@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft, Tag, ExternalLink, Github } from 'lucide-react';
+import { marked } from 'marked';
 
 interface BlogPost {
   id: string;
@@ -21,6 +22,12 @@ const BlogPost = () => {
   const navigate = useNavigate();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Configure marked options for better security and styling
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  });
 
   // Sample blog post content
   const samplePosts: { [key: string]: BlogPost } = {
@@ -533,9 +540,9 @@ Implemented comprehensive SEO structure:
 ### 3. Site Structure
 
 Implemented hierarchical URL structure:
-- `/collections/category/subcategory`
-- `/products/product-name`
-- `/pages/content-page`
+- \`/collections/category/subcategory\`
+- \`/products/product-name\`
+- \`/pages/content-page\`
 
 ## Customer Experience Enhancement
 
@@ -603,7 +610,7 @@ Implemented input validation and sanitization:
     type="text" 
     name="name" 
     required 
-    pattern="[A-Za-z\s]+"
+    pattern="[A-Za-z\\s]+"
     title="Please enter a valid name"
   >
   <input 
@@ -747,19 +754,15 @@ The project showcases the importance of a holistic approach to e-commerce optimi
   };
 
   const renderMarkdown = (content: string) => {
-    // Simple markdown rendering - in production, use a proper markdown parser
-    return content
-      .replace(/^# (.*$)/gm, '<h1 class="text-3xl font-bold text-white mb-6 mt-8">$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-white mb-4 mt-6">$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3 class="text-xl font-semibold text-white mb-3 mt-4">$1</h3>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-primary-300">$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em class="italic text-secondary-200">$1</em>')
-      .replace(/`(.*?)`/g, '<code class="bg-secondary-800 text-primary-300 px-2 py-1 rounded text-sm">$1</code>')
-      .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-secondary-900 border border-secondary-700 rounded-lg p-4 overflow-x-auto mb-4"><code class="text-sm text-secondary-200">$2</code></pre>')
-      .replace(/^- (.*$)/gm, '<li class="text-secondary-200 mb-2 list-disc list-inside">$1</li>')
-      .replace(/^\d+\. (.*$)/gm, '<li class="text-secondary-200 mb-2 list-decimal list-inside">$1</li>')
-      .replace(/^(?!<[h|u|l|p|d])(.*$)/gm, '<p class="text-secondary-200 mb-4 leading-relaxed">$1</p>')
-      .replace(/\n\n/g, '\n');
+    try {
+      // Use marked to safely parse markdown
+      const htmlContent = marked(content);
+      return htmlContent;
+    } catch (error) {
+      console.error('Error parsing markdown:', error);
+      // Fallback to plain text if parsing fails
+      return `<p class="text-secondary-200">${content}</p>`;
+    }
   };
 
   if (loading) {
@@ -847,7 +850,7 @@ The project showcases the importance of a holistic approach to e-commerce optimi
         {/* Post Content */}
         <article className="prose prose-lg max-w-none animate-slide-bottom animate-delay-200">
           <div 
-            className="text-secondary-200 leading-relaxed"
+            className="markdown-content text-secondary-200 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
           />
         </article>
@@ -893,6 +896,48 @@ The project showcases the importance of a holistic approach to e-commerce optimi
           </div>
         </footer>
       </div>
+
+      <style jsx>{`
+        .markdown-content h1 {
+          @apply text-3xl font-bold text-white mb-6 mt-8;
+        }
+        .markdown-content h2 {
+          @apply text-2xl font-bold text-white mb-4 mt-6;
+        }
+        .markdown-content h3 {
+          @apply text-xl font-semibold text-white mb-3 mt-4;
+        }
+        .markdown-content p {
+          @apply text-secondary-200 mb-4 leading-relaxed;
+        }
+        .markdown-content ul {
+          @apply text-secondary-200 mb-4 list-disc list-inside;
+        }
+        .markdown-content ol {
+          @apply text-secondary-200 mb-4 list-decimal list-inside;
+        }
+        .markdown-content li {
+          @apply mb-2;
+        }
+        .markdown-content strong {
+          @apply font-semibold text-primary-300;
+        }
+        .markdown-content em {
+          @apply italic text-secondary-200;
+        }
+        .markdown-content code {
+          @apply bg-secondary-800 text-primary-300 px-2 py-1 rounded text-sm;
+        }
+        .markdown-content pre {
+          @apply bg-secondary-900 border border-secondary-700 rounded-lg p-4 overflow-x-auto mb-4;
+        }
+        .markdown-content pre code {
+          @apply bg-transparent text-secondary-200 p-0;
+        }
+        .markdown-content blockquote {
+          @apply border-l-4 border-primary-500 pl-4 italic text-secondary-300 mb-4;
+        }
+      `}</style>
     </div>
   );
 };
