@@ -756,9 +756,8 @@ The project showcases the importance of a holistic approach to e-commerce optimi
       .replace(/\*(.*?)\*/g, '<em class="italic text-secondary-200">$1</em>')
       .replace(/`(.*?)`/g, '<code class="bg-secondary-800 text-primary-300 px-2 py-1 rounded text-sm">$1</code>')
       .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-secondary-900 border border-secondary-700 rounded-lg p-4 overflow-x-auto mb-4"><code class="text-sm text-secondary-200">$2</code></pre>')
-      .replace(/^- (.*$)/gm, '<li class="text-secondary-200 mb-2">$1</li>')
-      .replace(/(<li.*<\/li>)/s, '<ul class="list-disc list-inside mb-4 space-y-2">$1</ul>')
-      .replace(/^\d+\. (.*$)/gm, '<li class="text-secondary-200 mb-2">$1</li>')
+      .replace(/^- (.*$)/gm, '<li class="text-secondary-200 mb-2 list-disc list-inside">$1</li>')
+      .replace(/^\d+\. (.*$)/gm, '<li class="text-secondary-200 mb-2 list-decimal list-inside">$1</li>')
       .replace(/^(?!<[h|u|l|p|d])(.*$)/gm, '<p class="text-secondary-200 mb-4 leading-relaxed">$1</p>')
       .replace(/\n\n/g, '\n');
   };
