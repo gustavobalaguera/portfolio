@@ -26,11 +26,6 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
         <div className="animate-fade-in-up">
-          {/* Status Badge */}
-          <div className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-300 text-sm font-medium mb-8 animate-slide-top">
-            <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-            Open to Work - Cybersecurity Internships
-          </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 animate-slide-bottom animate-delay-200">
             <span className="bg-gradient-to-r from-white via-primary-200 to-primary-400 bg-clip-text text-transparent">
@@ -42,10 +37,16 @@ const Hero = () => {
             Aspiring Cybersecurity Professional
           </p>
           
-          <p className="text-lg text-secondary-300 mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-right animate-delay-600">
+          <p className="text-lg text-secondary-300 mb-8 max-w-3xl mx-auto leading-relaxed animate-slide-right animate-delay-600">
             Full-time student at Stevens Institute of Technology specializing in ethical hacking, 
             network defense, and penetration testing. Top 2% nationally in cybersecurity competitions from CyberStart America.
           </p>
+
+          {/* Status Badge */}
+          <div className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-300 text-sm font-medium mb-8 animate-slide-top max-w-full sm:max-w-fit whitespace-normal sm:whitespace-nowrap break-words sm:break-normal">
+            <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+            Open to Work - Cybersecurity Internships
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 animate-scale-in animate-delay-800">
             <button
