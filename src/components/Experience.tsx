@@ -125,35 +125,63 @@ const Experience = () => {
               Education & Training
             </span>
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-300 animate-scale-in animate-delay-900">
-              <div className="flex items-center mb-6">
-                <div className="bg-primary-500/10 p-3 rounded-xl mr-4">
-                  <Briefcase className="h-6 w-6 text-primary-400" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              {/* Stevens Institute of Technology - Make this span 2 columns on md+ screens */}
+              <div className="md:col-span-2 bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-300 animate-scale-in animate-delay-900">
+                <div className="flex items-center mb-6">
+                  <div className="bg-primary-500/10 p-3 rounded-xl mr-4">
+                    <Briefcase className="h-6 w-6 text-primary-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Stevens Institute of Technology</h4>
+                    <p className="text-primary-400 font-medium">Bachelor's Degree - Cybersecurity Major</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">Stevens Institute of Technology</h4>
-                  <p className="text-primary-400 font-medium">Bachelor's Degree - Cybersecurity Major</p>
-                </div>
+                <p className="text-secondary-400">Sept. 2023 - Current</p>
               </div>
-              <p className="text-secondary-400">Sept. 2023 - Current</p>
-            </div>
 
-            <div className="bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-300 animate-scale-in animate-delay-1000">
-              <div className="flex items-center mb-6">
-                <div className="bg-primary-500/10 p-3 rounded-xl mr-4">
-                  <Briefcase className="h-6 w-6 text-primary-400" />
+              <div className="bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-300 animate-scale-in animate-delay-1000">
+                <div className="flex items-center mb-6">
+                  <div className="bg-primary-500/10 p-3 rounded-xl mr-4">
+                    <Briefcase className="h-6 w-6 text-primary-400" />
+                  </div>
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <h4 className="text-xl font-semibold text-white break-words">HubSpot Academy</h4>
+                    <a
+                      href="https://app-na2.hubspot.com/academy/achievements/kl9n2d6y/en/1/gustavo-balaguera/seo-ii"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors break-words"
+                    >
+                      HubSpot SEO II Certification
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">SANS Technology Institute</h4>
-                  <p className="text-primary-400 font-medium">Certification - GIAC Foundational Cybersecurity Technologies (GFACT)</p>
-                </div>
+                <p className="text-secondary-400">June 2025</p>
               </div>
-              <p className="text-secondary-400">June 2023 - Sept. 2023</p>
+
+              <div className="md:col-span-3 bg-secondary-800/30 backdrop-blur-sm border border-secondary-700/50 rounded-2xl p-8 hover:bg-secondary-800/50 transition-all duration-300 animate-scale-in animate-delay-1000">
+                <div className="flex items-center mb-6">
+                  <div className="bg-primary-500/10 p-3 rounded-xl mr-4">
+                    <Briefcase className="h-6 w-6 text-primary-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">SANS Technology Institute</h4>
+                    <a
+                      href="https://www.credly.com/badges/ec19de80-1394-4ac2-bfdc-a7ffaaabad24"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                    >
+                      GIAC Foundational Cybersecurity Technologies (GFACT) Certification
+                    </a>
+                  </div>
+                </div>
+                <p className="text-secondary-400">June 2023 - Sept. 2023</p>
+              </div>
+            </div>
             </div>
           </div>
-        </div>
-      </div>
     </section>
   );
 };

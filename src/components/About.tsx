@@ -34,20 +34,67 @@ const About = () => {
               
               <div className="flex-1 space-y-6">
                 <p className="text-lg text-secondary-200 leading-relaxed">
-                  I'm a dedicated cybersecurity student at <span className="text-primary-400 font-semibold">Stevens Institute of Technology</span>, 
-                  with specialized knowledge gained through the <span className="text-primary-400 font-semibold">SANS Technology Institute</span> and 
-                  <span className="text-primary-400 font-semibold"> National Cyber Scholarship Foundation</span>. 
+                  I'm a dedicated cybersecurity student at <a
+                    href="https://assets.stevens.edu/mviowpldu823/x6i3pe1XhnWKDOxDxmN0d/241246339b921f337906ff79cefd123d/2025_Spring_Dean-s_List_2025.06.09.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                    Stevens Institute of Technology
+                  </a>, 
+                  with specialized knowledge gained through the <a
+                    href="https://www.sans.org/about/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                    SANS Institute
+                  </a> and the <a
+                    href="https://www.nationalcyberscholarship.org/ncsf-winners-2023"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                     National Cyber Scholarship Foundation
+                  </a>. 
                   My passion lies in penetration testing and uncovering vulnerabilities in systems and applications to strengthen digital defenses from the inside out.
                 </p>
                 
                 <p className="text-lg text-secondary-200 leading-relaxed">
-                  I continue to develop my skills with <span className="text-primary-400 font-semibold">PortSwigger</span>, constantly applying my learnings in CTF challenges like <span className="text-primary-400 font-semibold">PicoCTF</span> and bug bounty programs. 
+                  I continue to develop my skills with <a
+                    href="https://portswigger.net/web-security"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                    PortSwigger
+                  </a>, constantly applying my learnings in CTF challenges like <a
+                    href="https://picoctf.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                    PicoCTF
+                  </a> and bug bounty programs. 
                   Through these real world tests, I've successfully identified and reported a (repeat 🤷‍♂️) SQL injection vulnerability in a website's search query.
                 </p>
 
                 <p className="text-lg text-secondary-200 leading-relaxed">
-                  As a <span className="text-primary-400 font-semibold">Shopify Partner</span>, I also offer part-time web development services, 
-                  specializing in theme customization, website optimization, and SEO recommendations. I'm always open to discussing 
+                  As a <a
+                    href="https://www.shopify.com/partners"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 font-semibold underline hover:text-primary-200 transition-colors"
+                  >
+                    Shopify Partner
+                  </a>, I also offer part-time web development services, 
+                  specializing in theme customization, website optimization, and <a
+              href="https://app-na2.hubspot.com/academy/achievements/kl9n2d6y/en/1/gustavo-balaguera/seo-ii"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-400 underline hover:text-primary-200 transition-colors"
+            >
+              SEO recommendations</a>. I'm always open to discussing 
                   your website needs and negotiating competitive pricing.
                 </p>
 
@@ -79,7 +126,7 @@ const About = () => {
               {
                 icon: Award,
                 title: "Certifications",
-                subtitle: "GFACT Certified",
+                subtitle: "GIAC Foundational Cybersecurity Technologies (GFACT), HubSpot SEO I & II",
                 description: "SANS Security Essentials",
                 color: "primary"
               },

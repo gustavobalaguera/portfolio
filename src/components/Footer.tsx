@@ -1,17 +1,42 @@
 import { Shield, Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     } else {
-      // If not found, navigate to homepage with hash
-      window.location.href = `/`;
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+  const navItems = [
+    { label: 'Home', id: 'hero', type: 'section' },
+    { label: 'About', id: 'about', type: 'section' },
+    { label: 'Experience', id: 'experience', type: 'section' },
+    { label: 'Projects', id: 'projects', type: 'section' },
+    { label: 'Skills', id: 'skills', type: 'section' },
+    { label: 'Awards', id: 'awards', type: 'section' },
+    { label: 'Blog', id: '/blog', type: 'route' },
+    { label: 'Contact', id: 'contact', type: 'section' },
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -67,19 +92,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {[
-                { label: 'Home', id: 'hero', type: 'section' },
-    { label: 'About', id: 'about', type: 'section' },
-    { label: 'Experience', id: 'experience', type: 'section' },
-    { label: 'Projects', id: 'projects', type: 'section' },
-    { label: 'Skills', id: 'skills', type: 'section' },
-    { label: 'Awards', id: 'awards', type: 'section' },
-    { label: 'Blog', id: '/blog', type: 'route' },
-    { label: 'Contact', id: 'contact', type: 'section' },
-              ].map((link) => (
+              {navItems.map((link) => (
                 <li key={link.id}>
                   <button
-                    onClick={() => scrollToSection(link.id)}
+                    onClick={() => link.type === 'section' ? scrollToSection(link.id) : handleNavigation(link.id)}
                     className="text-secondary-400 hover:text-white transition-colors duration-300"
                   >
                     {link.label}
