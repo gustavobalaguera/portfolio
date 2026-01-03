@@ -5,7 +5,7 @@ const Experience = () => {
     {
       title: "IT Strategist",
       company: "Riflessi | Luxury Italian Menswear",
-      period: "Oct. 2024 - May 2025",
+      period: "Oct. 2024 - Present",
       location: "New York, NY",
       achievements: [
         "Automated product entry in Shopify, cutting processing time by 47% through scripting",
