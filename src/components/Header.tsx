@@ -47,6 +47,7 @@ const Header = () => {
     { label: 'Skills', id: 'skills', type: 'section' },
     { label: 'Awards', id: 'awards', type: 'section' },
     { label: 'Blog', id: '/blog', type: 'route' },
+    { label: 'Starfall', id: '/starfall', type: 'route' },
     { label: 'Contact', id: 'contact', type: 'section' },
   ];
 

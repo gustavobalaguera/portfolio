@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import ScrollToTop from './components/ScrollToTop';
+import Demo from './components/ui/demo';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           } />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/starfall" element={<Demo />} />
         </Routes>
         <Footer />
       </div>
