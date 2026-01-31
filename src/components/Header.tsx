@@ -43,10 +43,11 @@ const Header = () => {
     { label: 'Home', id: 'hero', type: 'section' },
     { label: 'About', id: 'about', type: 'section' },
     { label: 'Experience', id: 'experience', type: 'section' },
-    { label: 'Projects', id: 'projects', type: 'section' },
+    // { label: 'Projects', id: 'projects', type: 'section' },
     { label: 'Skills', id: 'skills', type: 'section' },
     { label: 'Awards', id: 'awards', type: 'section' },
     { label: 'Blog', id: '/blog', type: 'route' },
+    { label: 'Starfall', id: '/starfall', type: 'route' },
     { label: 'Contact', id: 'contact', type: 'section' },
   ];
 
