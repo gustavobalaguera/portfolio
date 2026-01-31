@@ -1,73 +1,47 @@
-# Welcome to your Lovable project
+# Gustavo Balaguera | Cybersecurity Portfolio
 
-## Project info
+Welcome to my personal portfolio!  
+This site showcases my experience, skills, certifications, and education as a cybersecurity student and analyst based in New York.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 About
 
-## How can I edit this code?
+- **Name:** Gustavo Balaguera  
+- **Role:** Cybersecurity Student & Security Analyst  
+- **Location:** New York, NY / Stevens Institute of Technology, Hoboken, NJ  
+- **Status:** Open to cybersecurity internships and entry-level positions for Summer 2025 and beyond.
 
-There are several ways of editing your application.
+## 🛡️ Features
 
-**Use Lovable**
+- **Hero Section:** Brief introduction and call-to-action.
+- **About Me:** Overview of my background and interests.
+- **Experience:** Detailed work and internship history, including virtual cybersecurity experiences and analyst roles.
+- **Skills:** Technical proficiencies in cybersecurity, programming, tools, and Shopify.
+- **Certifications & Awards:** Industry certifications and academic honors.
+- **Education:** Coursework and degree information from Stevens Institute of Technology.
+- **Contact:** Email, LinkedIn, and GitHub links.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend:** React, TypeScript
+- **UI:** Custom components, Tailwind CSS (utility classes)
+- **Icons:** Lucide React
 
-**Use your preferred IDE**
+## 📂 Structure
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- `src/pages/Index.tsx` — Main portfolio page
+- `src/components/sections/` — Section components (About, Experience, Skills, etc.)
+- `public/index.html` — SEO and GEO optimized meta tags
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🌐 Live Demo
 
-Follow these steps:
+[View Portfolio](https://gustavobalaguera.github.io/portfolio/)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📫 Contact
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **Email:** gustavobalaguera214@gmail.com
+- **LinkedIn:** [gbalaguera](https://www.linkedin.com/in/gbalaguera)
+- **GitHub:** [gustavobalaguera](https://github.com/gustavobalaguera)
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+> Built with passion for cybersecurity, ethical hacking, and continuous learning.

@@ -125,7 +125,7 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                     <button onClick={ctaButtons.secondary.onClick} className="glass-button min-w-[160px] inter-font text-sm font-medium text-foreground rounded-lg px-6 py-3">{ctaButtons.secondary.label}</button>
                 </div>
                 <div className="divider mb-16" />
-                <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+                {/* <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
                     {projects.map((project, index) => (
                         <div key={index} className="glass-card rounded-2xl p-6 text-left">
                             <div className="project-image rounded-xl h-32 mb-4 flex items-center justify-center">{project.imageContent}</div>
@@ -138,8 +138,8 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                             </div>
                         </div>
                     ))}
-                </div>
-                <div className="divider mb-16" />
+                </div> */}
+                {/* <div className="divider mb-16" /> */}
                 <div id="skills" className="flex flex-col sm:flex-row justify-center items-center gap-8 text-center">
                     {stats.map((stat, index) => (
                         <React.Fragment key={stat.label}>
@@ -151,6 +151,9 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                         </React.Fragment>
                     ))}
                 </div>
+            <div className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-300 text-sm font-medium mb-8 animate-slide-top max-w-full sm:max-w-fit whitespace-normal sm:whitespace-nowrap break-words sm:break-normal" style={{marginTop: '2rem'}}>
+    <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse">
+        </div>Open to Work - Cybersecurity Internships</div>
             </div>
         </main>
       </div>
