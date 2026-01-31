@@ -26,7 +26,7 @@ const AboutSection: React.FC = () => (
             <div className="relative group flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
               <img
-                src="/Gustavo_Balaguera_Cybersecurity_Enthusiast.jpg"
+                src="/portfolio/Gustavo_Balaguera_Cybersecurity_Enthusiast.jpg"
                 alt="Gustavo Balaguera - Professional Photo"
                 className="relative w-48 h-48 lg:w-56 lg:h-56 object-cover rounded-2xl border-2 border-primary/20 shadow-2xl group-hover:scale-105 transition-transform duration-300"
               />
