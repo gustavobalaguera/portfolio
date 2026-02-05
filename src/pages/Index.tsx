@@ -223,7 +223,7 @@ const education = {
 const contact = {
   email: "gustavobalaguera214@gmail.com",
   location: "Stevens Institute of Technology, Hoboken, NJ",
-  status: "Actively seeking cybersecurity internships and entry-level positions for Summer 2025 and beyond.",
+  status: "Actively seeking cybersecurity internships and entry-level positions for Summer 2026 and beyond.",
   linkedin: "https://www.linkedin.com/in/gbalaguera",
   github: "https://github.com/gustavobalaguera",
 };
